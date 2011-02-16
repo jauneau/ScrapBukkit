@@ -18,10 +18,14 @@ commands:
     usage: |
            /<command> item[:data] [amount] [player]
            Example: /<command> 2 - gives you 1 grass.
+           Example: /<command> grass - gives you 1 grass.
            Example: /<command> 2 20 - gives you 20 grass.
+           Example: /<command> lava bucket 20 - gives you 20 lava buckets.
            Example: /<command> 2 -1 - gives you unlimited grass.
            Example: /<command> 2 64 Bukkit - gives a player named Bukkit 64 grass.
+           Example: /<command> grass 64 Bukkit - gives a player named Bukkit 64 grass.
            Example: /<command> 35:12 200 - gives you 200 brown wool.
+           Example: /<command> wool:12 200 - gives you 200 brown wool.
   tp:
     description: Teleports yourself or a player to another player or specific coordinates.
     usage: |
