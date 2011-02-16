@@ -13,6 +13,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.Server;
 import org.bukkit.World;
+import org.bukkit.material.MaterialData;
 import org.bukkit.plugin.PluginDescriptionFile;
 import org.bukkit.plugin.PluginLoader;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -125,6 +126,18 @@ public class ScrapBukkit extends JavaPlugin {
         return false;
     }
 
+    private Material getMaterial(String name) {
+    	try {
+    		return Material.valueOf(name.toUpperCase().replaceAll(" ", "_"));
+    	} catch (Exception e) {
+			return null;
+		}
+    }
+    
+    private String getName(Material material) {
+    	return material.toString().toLowerCase().replaceAll("_", " ");
+    }
+
     private boolean performGive(CommandSender sender, String[] split) {
         if ((split.length > 3) || (split.length == 0)) {
             return false;
@@ -142,6 +155,9 @@ public class ScrapBukkit extends JavaPlugin {
         if (split.length >= 1) {
             gData = split[0].split(":");
             material = Material.matchMaterial(gData[0]);
+            if (material == null) {
+            	material = getMaterial(gData[0]);
+            }
             if (gData.length == 2) {
                 bytedata = Byte.valueOf(gData[1]);
             }
@@ -176,7 +192,7 @@ public class ScrapBukkit extends JavaPlugin {
         } else {
             player.getInventory().addItem(new ItemStack(material, count));
         }
-        sender.sendMessage("Given " + player.getDisplayName() + " " + count + " " + material.toString());
+        sender.sendMessage("Given " + player.getDisplayName() + " " + count + " " + getName(material));
         return true;
     }
 
